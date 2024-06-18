@@ -1,6 +1,6 @@
 import unittest
 from unittest.mock import MagicMock, patch
-from kafka_consumer import load_config, create_kafka_consumer, create_kafka_producer, clean_data, process_messages, previous_averages
+from kafka_consumer import load_config, create_kafka_consumer, create_kafka_producer, clean_data, process_messages, previous_average # previous_averages
 
 class TestKafkaConsumer(unittest.TestCase):
 
@@ -14,8 +14,9 @@ class TestKafkaConsumer(unittest.TestCase):
             }
         }
         # Reset the previous_averages before each test
-        global previous_averages
-        previous_averages = []
+        global previous_average
+        previous_average = None
+        # previous_averages = []
 
     def test_load_config(self):
         config = load_config()
