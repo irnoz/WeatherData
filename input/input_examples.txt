@@ -40,3 +40,26 @@ Other Bad Examples:
 {"station_id": "ST0004", "timestamp": "2024-06-16T14:45:00", "sensor0": "NaN", "sensor1": 22.789, "sensor2": 24.123, "sensor3": 23.987}
 {"station_id": "ST0005", "timestamp": "1970-01-01T00:00:00", "sensor0": 23.456, "sensor1": 22.789, "sensor2": 24.123, "sensor3": 23.987}
 {"station_id": "ST0006", "timestamp": "2024-06-16T14:45:00", "sensor0": "abc", "sensor1": "def", "sensor2": "ghi", "sensor3": "jkl"}
+
+
+FOR CASSANDRA:
+
+cqlsh
+
+USE weather;
+
+SELECT * FROM clean_data;
+
+
+Table Created With:
+
+CREATE KEYSPACE weather WITH replication = {'class': 'SimpleStrategy', 'replication_factor': '1'};
+
+USE weather;
+
+CREATE TABLE clean_data (
+    station_id text,
+    timestamp text,
+    temperature float,
+    PRIMARY KEY (station_id, timestamp)
+);
