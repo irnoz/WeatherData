@@ -5,8 +5,9 @@ from kafka.errors import NoBrokersAvailable
 from statistics import mean
 import time
 
-# previous_averages = []
-previous_average = None
+# History of calculated averages
+previous_averages = []
+# previous_average = None
 
 def load_config():
     with open("config/config.yaml", 'r') as ymlfile:
@@ -49,8 +50,8 @@ def clean_data(sensors):
     # If all readings are within 2.0 degrees
     if all(diff < 2.0 for diff in differences):
         current_avg = mean(readings)
-        # previous_averages.append(current_avg)
-        previous_average = current_avg
+        previous_averages.append(current_avg)
+        # previous_average = current_avg
         print(f"All readings are within 2.0 degrees. Average: {current_avg}")
         return current_avg, "Reliable"
 
@@ -65,8 +66,8 @@ def clean_data(sensors):
             current_avg = mean(readings[:-1])
         else:
             return None, "UnreliableRow"
-        # previous_averages.append(current_avg)
-        previous_average = current_avg
+        previous_averages.append(current_avg)
+        # previous_average = current_avg
         print(f"One sensor deviates by 2.0 or more. Average: {current_avg}")
         return current_avg, "UnreliableSensorReading"
 
@@ -93,16 +94,14 @@ def clean_data(sensors):
 #         return None, "UnreliableRow"
 
 def is_outlier(current_avg):
-    if previous_average:
-        print(f"Checking if current average {current_avg} is an outlier compared to last average {previous_average}: {is_outlier}")
-        return abs(current_avg - previous_average) >= 2
-
-    # if previous_averages:
-    #     last_avg = previous_averages[-1]
-    #     is_outlier = abs(current_avg - last_avg) >= 2.0
-    #     print(f"Checking if current average {current_avg} is an outlier compared to last average {last_avg}: {is_outlier}")
-    #     return is_outlier
-
+    # if previous_average:
+    #     print(f"Checking if current average {current_avg} is an outlier compared to last average {previous_average}: {is_outlier}")
+    #     return abs(current_avg - previous_average) >= 2
+    if previous_averages:
+        last_avg = previous_averages[-1]
+        is_outlier = abs(current_avg - last_avg) >= 2.0
+        print(f"Checking if current average {current_avg} is an outlier compared to last average {last_avg}: {is_outlier}")
+        return is_outlier
     return False
 
 def process_messages(consumer, producer_clean, producer_monitoring, config):
@@ -114,6 +113,7 @@ def process_messages(consumer, producer_clean, producer_monitoring, config):
         clean_value, status = clean_data(sensors)
 
         if clean_value is not None:
+            print("Previous Averages: ",previous_averages)
             if is_outlier(clean_value):
                 producer_monitoring.send(config['kafka']['monitoring_topic'], value={
                     "reason": "OutlierAverageValue",
@@ -126,12 +126,13 @@ def process_messages(consumer, producer_clean, producer_monitoring, config):
                     "timestamp": data['timestamp'],
                     "temperature": clean_value
                 })
-                print(f"Sent clean data to clean_data topic: {data}")
-                producer_monitoring.send(config['kafka']['monitoring_topic'], value={
-                    "reason": status,
-                    "data": data
-                })
-                print(f"Sent reliable/unreliable sensor reading to monitoring topic: {data}")
+                if status != "Reliable":
+                    print(f"Sent clean data to clean_data topic: {data}")
+                    producer_monitoring.send(config['kafka']['monitoring_topic'], value={
+                        "reason": status,
+                        "data": data
+                    })
+                    print(f"Sent reliable/unreliable sensor reading to monitoring topic: {data}")
         else:
             producer_monitoring.send(config['kafka']['monitoring_topic'], value={
                 "reason": status,
