@@ -49,21 +49,18 @@ def clean_data(sensors):
 
     # If all readings are within 2.0 degrees
     if all(diff < 2.0 for diff in differences):
-        current_avg = mean(readings)
+        current_avg = round(mean(readings), 3)
         previous_averages.append(current_avg)
         # previous_average = current_avg
         print(f"All readings are within 2.0 degrees. Average: {current_avg}")
         return current_avg, "Reliable"
 
-# [20, 20, 30, 30]
-# 0 10, 0;
-
     # If only one sensor deviates by 2.0 or more
     if len([d for d in differences if d >= 2.0]) == 1:
         if differences[0] >= 2.0:
-            current_avg = mean(readings[1:])
+            current_avg = round(mean(readings[1:]), 3)
         elif differences[-1] >= 2.0:
-            current_avg = mean(readings[:-1])
+            current_avg = round(mean(readings[:-1]), 3)
         else:
             return None, "UnreliableRow"
         previous_averages.append(current_avg)
@@ -97,9 +94,11 @@ def is_outlier(current_avg):
     # if previous_average:
     #     print(f"Checking if current average {current_avg} is an outlier compared to last average {previous_average}: {is_outlier}")
     #     return abs(current_avg - previous_average) >= 2
-    if previous_averages:
-        last_avg = previous_averages[-1]
+    if len(previous_averages) > 1:
+        last_avg = previous_averages[-2]
         is_outlier = abs(current_avg - last_avg) >= 2.0
+        if is_outlier:
+            previous_averages.pop()
         print(f"Checking if current average {current_avg} is an outlier compared to last average {last_avg}: {is_outlier}")
         return is_outlier
     return False
@@ -126,13 +125,14 @@ def process_messages(consumer, producer_clean, producer_monitoring, config):
                     "timestamp": data['timestamp'],
                     "temperature": clean_value
                 })
+                print(f"Sent reliable sensor reading to clean_data topic: {data}")
                 if status != "Reliable":
                     print(f"Sent clean data to clean_data topic: {data}")
                     producer_monitoring.send(config['kafka']['monitoring_topic'], value={
                         "reason": status,
                         "data": data
                     })
-                    print(f"Sent reliable/unreliable sensor reading to monitoring topic: {data}")
+                    print(f"Sent unreliable sensor reading to monitoring topic: {data}")
         else:
             producer_monitoring.send(config['kafka']['monitoring_topic'], value={
                 "reason": status,
