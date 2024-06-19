@@ -89,7 +89,7 @@ def process_messages(consumer, producer_clean, producer_monitoring, config):
         data = message.value
         print("-------------------------------------New Entry-------------------------------------")
         print(f"Received message: {data}")
-        sensors = [data['sensor0'], data['sensor1'], data['sensor2'], data['sensor3']]
+        sensors = [float(data['sensor0']), float(data['sensor1']), float(data['sensor2']), float(data['sensor3'])]
         clean_value, status = clean_data(sensors)
 
         if clean_value is not None:
