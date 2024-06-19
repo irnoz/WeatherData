@@ -26,18 +26,18 @@ def create_kafka_consumer(config):
 
 def create_cassandra_session(config):
     while True:
-        try:
-            auth_provider = PlainTextAuthProvider(
-                username=config['cassandra']['username'],
-                password=config['cassandra']['password']
-            )
-            cluster = Cluster([config['cassandra']['host']], auth_provider=auth_provider)
+        # try:
+            # auth_provider = PlainTextAuthProvider(
+            #     username=config['cassandra']['username'],
+            #     password=config['cassandra']['password']
+            # )
+            cluster = Cluster([config['cassandra']['host']])#, auth_provider=auth_provider)
             session = cluster.connect(config['cassandra']['keyspace'])
             print("Cassandra session created successfully.")
             return session
-        except Exception as e:
-            print(f"Error creating Cassandra session: {e}. Retrying in 5 seconds...")
-            time.sleep(5)
+        # except Exception as e:
+        #     print(f"Error creating Cassandra session: {e}. Retrying in 5 seconds...")
+        #     time.sleep(5)
 
 def write_to_cassandra(session, data):
     try:
