@@ -42,10 +42,10 @@ def create_cassandra_session(config):
 def write_to_cassandra(session, data):
     try:
         query = SimpleStatement("""
-            INSERT INTO clean_data (station_id, timestamp, temperature)
+            INSERT INTO clean_data (ts, station_id, temperature)
             VALUES (%s, %s, %s)
         """)
-        session.execute(query, (data['station_id'], data['timestamp'], data['temperature']))
+        session.execute(query, (data['ts'], data['station_id'], data['temperature']))
         print(f"Data inserted into Cassandra: {data}")
     except Exception as e:
         print(f"Error inserting data into Cassandra: {e}")

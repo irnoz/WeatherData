@@ -1,45 +1,45 @@
 Reliable Example:
 
 All sensors are within 2.0 degrees of each other.
-{"station_id": "ST0003", "timestamp": "2024-06-16T15:00:00", "sensor0": 22.5, "sensor1": 22.3, "sensor2": 22.7, "sensor3": 22.6}
+{"station_id": "ST0003", "ts": "2024-06-16T15:00:00", "sensor0": 22.5, "sensor1": 22.3, "sensor2": 22.7, "sensor3": 22.6}
 
 UnreliableSensorReading Example:
 
 One sensor (sensor3) deviates by more than 2.0 degrees from the others.
-{"station_id": "ST0004", "timestamp": "2024-06-16T15:15:00", "sensor0": 21.8, "sensor1": 22.1, "sensor2": 21.9, "sensor3": 25.0}
+{"station_id": "ST0004", "ts": "2024-06-16T15:15:00", "sensor0": 21.8, "sensor1": 22.1, "sensor2": 21.9, "sensor3": 25.0}
 
 UnreliableRow Examples:
 
 Two sensors deviate significantly from the others.
-{"station_id": "ST0005", "timestamp": "2024-06-16T15:30:00", "sensor0": 20.5, "sensor1": 23.2, "sensor2": 23.5, "sensor3": 25.7}
-{"station_id": "ST0006", "timestamp": "2024-06-16T15:45:00", "sensor0": 22.0, "sensor1": 22.2, "sensor2": 25.0, "sensor3": 24.8}
+{"station_id": "ST0005", "ts": "2024-06-16T15:30:00", "sensor0": 20.5, "sensor1": 23.2, "sensor2": 23.5, "sensor3": 25.7}
+{"station_id": "ST0006", "ts": "2024-06-16T15:45:00", "sensor0": 22.0, "sensor1": 22.2, "sensor2": 25.0, "sensor3": 24.8}
 
 OutlierAverageValue Example:
 
 The average from the previous averages differs by 2.0 or more.
-{"station_id": "ST0007", "timestamp": "2024-06-16T16:00:00", "sensor0": 19.5, "sensor1": 22.5, "sensor2": 22.0, "sensor3": 23.5}
-{"station_id": "ST0008", "timestamp": "2024-06-16T16:00:15", "sensor0": 29.5, "sensor1": 32.5, "sensor2": 32.0, "sensor3": 33.5}
+{"station_id": "ST0007", "ts": "2024-06-16T16:00:00", "sensor0": 19.5, "sensor1": 22.5, "sensor2": 22.0, "sensor3": 23.5}
+{"station_id": "ST0008", "ts": "2024-06-16T16:00:15", "sensor0": 29.5, "sensor1": 32.5, "sensor2": 32.0, "sensor3": 33.5}
 
 Other Examples:
-{"station_id": "ST0001", "timestamp": "2024-06-16T14:45:00", "sensor0": 23.456, "sensor1": 22.789, "sensor2": 24.123, "sensor3": 23.987}
-{"station_id": "ST0002", "timestamp": "2024-06-16T14:45:00", "sensor0": 23.456, "sensor1": 22.789, "sensor2": 24.123, "sensor3": 23.987}
-{"station_id": "ST0003", "timestamp": "2024-06-16T15:00:00", "sensor0": 22.5, "sensor1": 22.3, "sensor2": 22.7, "sensor3": 22.6}
-{"station_id": "ST0004", "timestamp": "2024-06-16T15:15:00", "sensor0": 21.8, "sensor1": 22.1, "sensor2": 21.9, "sensor3": 25.0}
-{"station_id": "ST0005", "timestamp": "2024-06-16T15:30:00", "sensor0": 20.5, "sensor1": 23.2, "sensor2": 23.5, "sensor3": 25.7}
-{"station_id": "ST0006", "timestamp": "2024-06-16T15:45:00", "sensor0": 22.0, "sensor1": 22.2, "sensor2": 25.0, "sensor3": 24.8}
-{"station_id": "ST0007", "timestamp": "2024-06-16T16:00:00", "sensor0": 19.5, "sensor1": 22.5, "sensor2": 22.0, "sensor3": 23.5}
-{"station_id": "ST0008", "timestamp": "2024-06-16T16:15:00", "sensor0": 21.0, "sensor1": 21.5, "sensor2": 20.5, "sensor3": 21.2}
-{"station_id": "ST0009", "timestamp": "2024-06-16T16:30:00", "sensor0": 23.0, "sensor1": 22.9, "sensor2": 24.5, "sensor3": 23.8}
-{"station_id": "ST0010", "timestamp": "2024-06-16T16:45:00", "sensor0": 22.1, "sensor1": 21.9, "sensor2": 22.3, "sensor3": 22.7}
+{"station_id": "ST0001", "ts": "2024-06-16T14:45:00", "sensor0": 23.456, "sensor1": 22.789, "sensor2": 24.123, "sensor3": 23.987}
+{"station_id": "ST0002", "ts": "2024-06-16T14:45:00", "sensor0": 23.456, "sensor1": 22.789, "sensor2": 24.123, "sensor3": 23.987}
+{"station_id": "ST0003", "ts": "2024-06-16T15:00:00", "sensor0": 22.5, "sensor1": 22.3, "sensor2": 22.7, "sensor3": 22.6}
+{"station_id": "ST0004", "ts": "2024-06-16T15:15:00", "sensor0": 21.8, "sensor1": 22.1, "sensor2": 21.9, "sensor3": 25.0}
+{"station_id": "ST0005", "ts": "2024-06-16T15:30:00", "sensor0": 20.5, "sensor1": 23.2, "sensor2": 23.5, "sensor3": 25.7}
+{"station_id": "ST0006", "ts": "2024-06-16T15:45:00", "sensor0": 22.0, "sensor1": 22.2, "sensor2": 25.0, "sensor3": 24.8}
+{"station_id": "ST0007", "ts": "2024-06-16T16:00:00", "sensor0": 19.5, "sensor1": 22.5, "sensor2": 22.0, "sensor3": 23.5}
+{"station_id": "ST0008", "ts": "2024-06-16T16:15:00", "sensor0": 21.0, "sensor1": 21.5, "sensor2": 20.5, "sensor3": 21.2}
+{"station_id": "ST0009", "ts": "2024-06-16T16:30:00", "sensor0": 23.0, "sensor1": 22.9, "sensor2": 24.5, "sensor3": 23.8}
+{"station_id": "ST0010", "ts": "2024-06-16T16:45:00", "sensor0": 22.1, "sensor1": 21.9, "sensor2": 22.3, "sensor3": 22.7}
 
 Other Bad Examples:
-{"station_id": "ST0001", "timestamp": "2024-06-16T14:45:00", "sensor0": 23.456, "sensor1": 22.789, "sensor2": 24.123, "sensor3": 23.987}
-{"station_id": "ST0002", "timestamp": "16-06-2024 14:45:00", "sensor0": 23.456, "sensor1": 22.789, "sensor2": 24.123, "sensor3": 23.987}
-{"station_id": "INVALID", "timestamp": "2024-06-16T14:45:00", "sensor0": 23.456, "sensor1": 22.789, "sensor2": 24.123, "sensor3": 23.987}
-{"station_id": "ST0003", "timestamp": "2024-06-16T14:45:00", "sensor0": 123.456, "sensor1": 22.789, "sensor2": 24.123, "sensor3": 23.987}
-{"station_id": "ST0004", "timestamp": "2024-06-16T14:45:00", "sensor0": "NaN", "sensor1": 22.789, "sensor2": 24.123, "sensor3": 23.987}
-{"station_id": "ST0005", "timestamp": "1970-01-01T00:00:00", "sensor0": 23.456, "sensor1": 22.789, "sensor2": 24.123, "sensor3": 23.987}
-{"station_id": "ST0006", "timestamp": "2024-06-16T14:45:00", "sensor0": "abc", "sensor1": "def", "sensor2": "ghi", "sensor3": "jkl"}
+{"station_id": "ST0001", "ts": "2024-06-16T14:45:00", "sensor0": 23.456, "sensor1": 22.789, "sensor2": 24.123, "sensor3": 23.987}
+{"station_id": "ST0002", "ts": "16-06-2024 14:45:00", "sensor0": 23.456, "sensor1": 22.789, "sensor2": 24.123, "sensor3": 23.987}
+{"station_id": "INVALID", "ts": "2024-06-16T14:45:00", "sensor0": 23.456, "sensor1": 22.789, "sensor2": 24.123, "sensor3": 23.987}
+{"station_id": "ST0003", "ts": "2024-06-16T14:45:00", "sensor0": 123.456, "sensor1": 22.789, "sensor2": 24.123, "sensor3": 23.987}
+{"station_id": "ST0004", "ts": "2024-06-16T14:45:00", "sensor0": "NaN", "sensor1": 22.789, "sensor2": 24.123, "sensor3": 23.987}
+{"station_id": "ST0005", "ts": "1970-01-01T00:00:00", "sensor0": 23.456, "sensor1": 22.789, "sensor2": 24.123, "sensor3": 23.987}
+{"station_id": "ST0006", "ts": "2024-06-16T14:45:00", "sensor0": "abc", "sensor1": "def", "sensor2": "ghi", "sensor3": "jkl"}
 
 
 FOR CASSANDRA:
@@ -58,8 +58,8 @@ CREATE KEYSPACE weather WITH replication = {'class': 'SimpleStrategy', 'replicat
 USE weather;
 
 CREATE TABLE clean_data (
+    ts text,
     station_id text,
-    timestamp text,
     temperature float,
-    PRIMARY KEY (station_id, timestamp)
+    PRIMARY KEY (station_id, ts)
 );

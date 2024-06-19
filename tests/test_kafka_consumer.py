@@ -13,9 +13,8 @@ class TestKafkaConsumer(unittest.TestCase):
                 'monitoring_topic': 'monitoring'
             }
         }
-        # Reset the previous_averages before each test
+
         global previous_averages
-        # previous_average = None
         previous_averages = []
 
     def test_load_config(self):
@@ -67,7 +66,7 @@ class TestKafkaConsumer(unittest.TestCase):
         mock_consumer.__iter__.return_value = [
             MagicMock(value={
                 'station_id': 'station1',
-                'timestamp': '2023-06-16T00:00:00Z',
+                'ts': '2023-06-16T00:00:00Z',
                 'sensor0': 20.5,
                 'sensor1': 20.7,
                 'sensor2': 20.6,
